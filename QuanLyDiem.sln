@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyDiem.Web", "QuanLyDiem.Web\QuanLyDiem.Web.csproj", "{1BF1A117-554D-4398-92F2-05B962E23A89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyDiem.Data", "QuanLyDiem.Data\QuanLyDiem.Data.csproj", "{229F6F80-E65E-495E-A443-D77E4347F7CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BF1A117-554D-4398-92F2-05B962E23A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF1A117-554D-4398-92F2-05B962E23A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF1A117-554D-4398-92F2-05B962E23A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF1A117-554D-4398-92F2-05B962E23A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{229F6F80-E65E-495E-A443-D77E4347F7CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{229F6F80-E65E-495E-A443-D77E4347F7CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{229F6F80-E65E-495E-A443-D77E4347F7CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{229F6F80-E65E-495E-A443-D77E4347F7CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

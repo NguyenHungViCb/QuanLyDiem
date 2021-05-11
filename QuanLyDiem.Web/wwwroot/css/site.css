@@ -1,0 +1,18 @@
+﻿*{
+    box-sizing: border-box;
+}
+.main-container{
+    background-color: white;
+    box-shadow: 9px 9px 18px #ebebeb;
+}
+
+.mySelect{
+    border:1px solid rgba(0,0,0,0.2)!important;
+    border-radius: 0.25rem;
+    outline: none;
+    padding: 0.33em 0.75em;
+    color: #4f4f4f;
+}
+.mySelect:focus{
+    border: 2px solid #0d6efd !important;
+}
