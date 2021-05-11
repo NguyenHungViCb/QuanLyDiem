@@ -2,7 +2,8 @@
 
 namespace QuanLyDiem.Web.Components
 {
-    public class DeleteStudent : ViewComponent
+    public class GradeDetails : ViewComponent
     {
+        
     }
 }

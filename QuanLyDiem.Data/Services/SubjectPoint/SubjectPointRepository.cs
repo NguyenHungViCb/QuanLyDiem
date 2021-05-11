@@ -22,14 +22,27 @@ namespace QuanLyDiem.Data.Services
             }
         }
 
-        public SubjectPoint GetSubjectPointById(int subjectPoint)
+        public SubjectPoint GetSubjectPointById(int subjectPointId)
         {
-            return _appDbContext.SubjectPoints.FirstOrDefault(sp => sp.SubjectPointId == subjectPoint);
+            return _appDbContext.SubjectPoints.Where(sp => sp.SubjectPointId == subjectPointId)
+                .Include(sp => sp.Subject).FirstOrDefault();
         }
 
         public IEnumerable<SubjectPoint> GetSubjectPointByStudentId(int studentId)
         {
-            return _appDbContext.SubjectPoints.Where(sp => sp.StudentId == studentId).Select(sp => sp);
+            return _appDbContext.SubjectPoints.Where(sp => sp.StudentId == studentId)
+                .Include(sp => sp.Subject).Select(sp => sp);
+        }
+
+        public void UpdateSubjectPoints(SubjectPoint subjectPoint)
+        {
+            SubjectPoint existing = GetSubjectPointById(subjectPoint.SubjectPointId);
+            if (existing != null)
+            {
+                existing.FirstExam = subjectPoint.FirstExam;
+                existing.SecondExam = subjectPoint.SecondExam;
+                _appDbContext.SaveChanges();
+            }
         }
     }
 }

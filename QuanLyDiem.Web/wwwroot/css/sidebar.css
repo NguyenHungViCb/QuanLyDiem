@@ -56,8 +56,6 @@
     transform: rotate(-180deg);
 }
 
-
-
 .parent-element ul li a{
     line-height: 2.4rem;
     padding-left: 2.4rem !important;
@@ -98,5 +96,5 @@
     transition: max-height 0.25s ease-in-out;
 }
 .slidedown {
-    max-height: 60px ;
+    max-height: 120px !important;
 }     

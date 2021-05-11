@@ -1,0 +1,87 @@
+﻿@model QuanLyDiem.Web.ViewModels.GradesManager
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+  <style>
+    @@media screen and (min-width: 992px){
+      .form-container{
+      width: 50% !important;
+      }
+    }
+  </style>
+}
+
+<div class="p-2 flex-grow-1 ">
+  <div class="main-container w-100 h-100 p-3 rounded">
+    <div class="mb-4">
+      <a asp-action="Overview" asp-route-id="@Model.Student.StudentId">Return</a>
+    </div>
+    <div class="d-flex justify-content-between w-100 align-items-center">
+      <div>
+        <div class="form-outline mb-4">
+          <input type="text" id="studentIdInput" class="form-control" disabled value="@Model.Student.StudentId"/>
+          <label class="form-label" for="studentIdInput">Student Id</label>
+        </div>
+        <div class="form-outline mb-4">
+          <input type="text" id="fullNameInput" class="form-control" disabled value="@Model.Student.LastName @Model.Student.FirstName"/>
+          <label class="form-label" for="fullNameInput">Full name</label>
+        </div>
+        <div class="mb-4">
+          <div class="form-outline mb-4">
+            <input type="text" id="classNameInput" class="form-control" disabled value="@Model.Student.Class.ClassName"/>
+            <label class="form-label" for="classNameInput">Class</label>
+          </div>
+          <div class="form-outline">
+            <input type="text" id="semesterNameInput" class="form-control" value="@Model.SubjectPoint.Subject.Semester.SemesterName"/>
+            <label class="form-label" for="semesterNameInput">Class</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="border-top"></div>
+    <div class="mt-4">
+      @if (ViewBag.Success != null && ViewBag.Success == "true")
+      {
+        <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-info text-dark" style="font-width: 700 !important;">
+          <div>Grades has been successfull updated!</div>
+          <div id="toggleMessage"><i class="fas fa-times"></i></div>
+        </div>
+      }
+      <div class=" border rounded">
+        <h4 class="py-2 px-1 bg-primary text-white rounded-top">@Model.SubjectPoint.Subject.SubjectName</h4>
+        <form class="form-container p-3" asp-action="Details" method="post">
+          <div class="form-outline mb-4" style="display: none !important;">
+            <input asp-for="SubjectPoint.SubjectPointId" class="form-control" id="subjectPointIdInput" type="float">
+            <label class="form-label" for="subjectPointIdInput">First Exam</label>
+          </div>
+          <div class="form-outline mb-4" style="display: none !important;">
+            <input asp-for="SubjectPoint.StudentId" class="form-control" id="studentIdIdInputForm" type="float">
+            <label class="form-label" for="studentIdIdInputForm">First Exam</label>
+          </div>
+          <div class="form-outline mb-4" style="display: none !important;">
+            <input asp-for="SubjectPoint.SubjectId" class="form-control" id="subjectIdIdInputForm" type="number">
+            <label class="form-label" for="subjectIdIdInputForm">First Exam</label>
+          </div>
+          <div class="form-outline mb-4" style="display: none !important;">
+            <input asp-for="SubjectPoint.SubjectId" value="@Model.SubjectPoint.SubjectId">
+          </div>
+          
+          <div class="form-outline mb-4">
+            <input asp-for="SubjectPoint.FirstExam" class="form-control" id="firstExamInput" type="float">
+            <label class="form-label" for="firstExamInput">First Exam</label>
+          </div>
+          <div class="form-outline mb-4">
+            <input asp-for="SubjectPoint.SecondExam" class="form-control" id="secondExam" type="number">
+            <label class="form-label" for="secondExam">Second Exam</label>
+          </div>
+          <button asp-action="Details" method="post" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+ const message = document.getElementById('message');
+ document.getElementById('toggleMessage').addEventListener('click', e=> message.classList.toggle('remove'))
+</script>

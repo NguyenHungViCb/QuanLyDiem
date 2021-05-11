@@ -34,13 +34,13 @@
         </div>
       </div>
       <div>
-        <a class="btn btn-sm btn-primary" asp-route-studentDetails="">Add Account</a>
+        <a class="btn btn-sm btn-primary" asp-action="Create">Add Subject</a>
       </div>
     </div>
       @if (ViewBag.Deleted != null && ViewBag.Deleted == "true")
             {
               <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-danger text-white" style="font-width: 700 !important;">
-                <div>Question Deleted</div>
+                <div>Subject Delete</div>
                 <div id="toggleMessage"><i class="fas fa-times" ></i></div>
               </div>
               
@@ -50,9 +50,9 @@
           <thead>
           <tr>
             <th scope="col">Id</th>
-            <th scope="col" class="filter">Họ<i class="fas fa-chevron-down"></i></th>
-            <th scope="col" class="filter">Tên<i class="fas fa-chevron-down"></i></th>
-            <th scope="col" class="filter">Lớp<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Tên lớp<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Tín chỉ<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Học kỳ<i class="fas fa-chevron-down"></i></th>
             <th></th>
           </tr>
           </thead>
@@ -62,10 +62,12 @@
             <tr>
               <th scope="row">@i.SubjectId</th>
               <td>@i.SubjectName</td>
+              <th>@i.CourseLoad</th>
+              <th>@i.Semester.SemesterName</th>
               <th >
                 <div class="d-flex justify-content-center">
-                  <a class="bg-primary text-white p-2 rounded-start"><i class="fas fa-edit"></i></a>
-                  <a class="bg-danger text-white p-2 rounded-end"><i class="fas fa-trash-alt "></i></a>
+                  <a asp-action="Details" asp-route-subjectId="@i.SubjectId" class="bg-primary text-white p-2 rounded-start"><i class="fas fa-edit"></i></a>
+                  <a asp-action="Delete" asp-route-subjectId="@i.SubjectId" class="bg-danger text-white p-2 rounded-end"><i class="fas fa-trash-alt "></i></a>
                 </div>
               </th>
             </tr>

@@ -1,8 +1,8 @@
-﻿@model QuanLyDiem.Web.ViewModels.StudentDetails
+﻿@model QuanLyDiem.Web.ViewModels.LecturersManager
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
-<style>
+    <style>
     thead tr th{
       font-weight: 700 !important;
       background-color: #fafafa !important;
@@ -14,7 +14,7 @@
         .remove{
                 display: none !important;
         }
-  </style>
+    </style>
 }
 <link rel="stylesheet" href="~/css/filter.css"/>
 
@@ -33,13 +33,13 @@
         </div>
       </div>
       <div>
-        <a class="btn btn-sm btn-primary" asp-action="CreateStudent" asp-route-studentDetails="">Add Account</a>
+        <a asp-action="Create" class="btn btn-primary">Add Account</a>
       </div>
     </div>
       @if (ViewBag.Deleted != null && ViewBag.Deleted == "true")
             {
               <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-danger text-white" style="font-width: 700 !important;">
-                <div>Lecturer Deletd</div>
+                <div>Lecturer Deleted</div>
                 <div id="toggleMessage"><i class="fas fa-times" ></i></div>
               </div>
               
@@ -51,22 +51,20 @@
             <th scope="col">Id</th>
             <th scope="col" class="filter">Họ<i class="fas fa-chevron-down"></i></th>
             <th scope="col" class="filter">Tên<i class="fas fa-chevron-down"></i></th>
-            <th scope="col" class="filter">Lớp<i class="fas fa-chevron-down"></i></th>
             <th></th>
           </tr>
           </thead>
           <tbody>
-          @foreach (var i in @Model.StudentList)
+          @foreach (var i in @Model.LecturerList)
           {
             <tr>
-              <th scope="row">@i.StudentId</th>
+              <th scope="row">@i.LecturerId</th>
               <td>@i.LastName</td>
               <td>@i.FirstName</td>
-              <td>@i.Class.ClassName</td>
               <th >
                 <div class="d-flex justify-content-center">
-                  <a asp-action="StudentDetails" asp-route-id="@i.StudentId" class="bg-primary text-white p-2 rounded-start"><i class="fas fa-edit"></i></a>
-                  <a href="@Url.Action("DeleteStudent", new {id = i.StudentId})" class="bg-danger text-white p-2 rounded-end"><i class="fas fa-trash-alt "></i></a>
+                  <a asp-action="Details" asp-route-id="@i.LecturerId" class="bg-primary text-white p-2 rounded-start"><i class="fas fa-edit"></i></a>
+                  <a asp-action="Delete" asp-route-id="@i.LecturerId" class="bg-danger text-white p-2 rounded-end"><i class="fas fa-trash-alt "></i></a>
                 </div>
               </th>
             </tr>

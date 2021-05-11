@@ -25,7 +25,7 @@ namespace QuanLyDiem.Data.Services
 
         public Student GetStudentById(int studentId)
         {
-            return _appDbContext.Students.FirstOrDefault(s => s.StudentId == studentId);
+            return _appDbContext.Students.Include(s =>s.Class).FirstOrDefault(s => s.StudentId == studentId);
         }
 
         public void CreateStudent(Student student)

@@ -8,5 +8,8 @@ namespace QuanLyDiem.Data.Services
     {
         IEnumerable<Subject> SubjectList { get;}
         Subject GetSubjectById(int subjectId);
+        void CreateSubject(Subject subject);
+        void UpdateSubject(Subject subject);
+        void DeleteSubject(int studentId);
     }
 }

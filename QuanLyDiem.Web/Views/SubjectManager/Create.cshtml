@@ -1,0 +1,67 @@
+﻿@model QuanLyDiem.Web.ViewModels.SubjectManager
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    <style>
+                @@media screen and (min-width:  992px){
+                    #form-container{
+                        width: 60%;
+                    }
+                }
+        </style>
+}
+
+<div class="p-2 flex-grow-1">
+    <div class="main-container w-100 h-100 p-3 rounded">
+        <div class="mb-5">
+            <a asp-action="Index">Return to list</a>
+        </div>
+        
+        @if (ViewBag.Success != null && ViewBag.Success == "true")
+            {
+                <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-info text-dark" style="font-width: 700 !important;">
+                    <div>New Subject Created! <a asp-action="Details" asp-route-subjectId="@ViewBag.SubjectId">Go to subject</a>.</div>
+                    <div id="toggleMessage"><i class="fas fa-times" ></i></div>
+                </div>
+            }        <div id="form-container">
+            <form asp-action="Create" method="post">
+                <div class="d-flex flex-column mb-4">
+                    <div class="form-outline">
+                        <input asp-for="@Model.Subject.SubjectName" type="text" id="questionInput" class="form-control" >
+                        <label class="form-label" for="questionInput">Name</label>
+                    </div>
+                    <span asp-validation-for="@Model.Subject.SubjectName" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column mb-4">
+                    <div class="form-outline">
+                        <input asp-for="Subject.CourseLoad" type="number" id="courseLoadInput" class="form-control">
+                        <label class="form-label" for="courseLoadInput">Course Load</label>
+                    </div>
+                </div>
+                <div class="mb-4 d-flex flex-column w-50">
+                    <select asp-for="Subject.SemesterId"  id="classSelection" class="mySelect">
+                        @foreach (var c in @Model.SemesterList)
+                        {
+                            if (c.SemesterId == Model.Subject.SemesterId)
+                            {
+                                <option value="@c.SemesterId" selected>@c.SemesterName</option>
+                            }
+                            else
+                            {
+                                <option value="@c.SemesterId">@c.SemesterName</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.Subject.SemesterId" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var model = @Json.Serialize(Model.Subject);
+    console.log(model)
+</script>

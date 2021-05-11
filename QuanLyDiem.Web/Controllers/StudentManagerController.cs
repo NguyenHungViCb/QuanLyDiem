@@ -14,12 +14,10 @@ namespace QuanLyDiem.Web.Controllers
     {
         private readonly IStudentRepository _studentRepositories;
         private readonly IClassRepository _classRepository;
-        private readonly IHtmlHelper _htmlHelper;
-        public StudentManagerController(IStudentRepository studentRepository, IClassRepository classRepository, IHtmlHelper htmlHelper)
+        public StudentManagerController(IStudentRepository studentRepository, IClassRepository classRepository)
         {
             this._studentRepositories = studentRepository;
             this._classRepository = classRepository;
-            this._htmlHelper = htmlHelper;
         }
         // GET
         public IActionResult Index()
@@ -103,5 +101,8 @@ namespace QuanLyDiem.Web.Controllers
             }
             return View(new StudentDetails { Student = student, ClassList = _classRepository.ClassList });
         }
-    }
+
+
+
+}
 }

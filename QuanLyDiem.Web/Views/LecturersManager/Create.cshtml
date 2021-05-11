@@ -1,4 +1,5 @@
-﻿@model QuanLyDiem.Web.ViewModels.StudentDetails
+﻿@model QuanLyDiem.Web.ViewModels.LecturersManager
+
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
@@ -19,31 +20,31 @@
 <div class="p-2 flex-grow-1">
     <div class="main-container w-100 h-100 p-3 rounded">
         <div class="mb-4">
-            <a asp-action="StudentList">Return to list</a>
+            <a asp-action="Index">Return to list</a>
         </div>
             @if (ViewBag.Success != null && ViewBag.Success == "true")
             {
                 <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-info text-dark" style="font-width: 700 !important;">
-                    <div>New Question Created! <a asp-action="StudentDetails" asp-route-id="@ViewBag.StudentId">Go to question</a>.</div>
+                    <div>New Lecturer Created! <a asp-action="" asp-route-id="@ViewBag.LecturerId">Go to Lecturer</a>.</div>
                     <div id="toggleMessage"><i class="fas fa-times" ></i></div>
                 </div>
             }
         <div id="form-container">
-            <form asp-action="CreateStudent" method="post">
+            <form asp-action="Create" method="post">
                                <div class="mb-4 d-flex justify-content-between">
                     <div class="d-flex flex-column">
                         <div class="form-outline">
-                            <input asp-for="@Model.Student.LastName" type="text" id="questionInput" class="form-control">
+                            <input asp-for="@Model.Lecturer.LastName" type="text" id="questionInput" class="form-control">
                             <label class="form-label" for="questionInput">LastName</label>
                         </div>
-                        <span asp-validation-for="@Model.Student.FirstName" class="text-danger"></span>
+                        <span asp-validation-for="@Model.Lecturer.LastName" class="text-danger"></span>
                     </div>
                     <div class="d-flex flex-column">
                         <div class="form-outline" style="margin-left: 0.6rem !important;">
-                            <input asp-for="@Model.Student.FirstName" type="text" id="form2Example1" class="form-control"/>
+                            <input asp-for="@Model.Lecturer.FirstName" type="text" id="form2Example1" class="form-control"/>
                             <label class="form-label" for="form2Example1">FirstName</label>
                         </div>
-                        <span asp-validation-for="@Model.Student.LastName" class="text-danger" style="margin-left: 0.6rem !important;"></span>
+                        <span asp-validation-for="@Model.Lecturer.FirstName" class="text-danger" style="margin-left: 0.6rem !important;"></span>
                     </div>
                 </div>
                 <div class="mb-4">
@@ -53,7 +54,7 @@
                         type="radio"
                         id="inlineradio1"
                         value="true"
-                        asp-for="Student.Gender"
+                        asp-for="Lecturer.Gender"
                         checked
                       />
                       <label class="form-check-label" for="inlineradio1">male</label>
@@ -64,47 +65,38 @@
                         type="radio"
                         id="inlineradio2"
                         value="false"
-                        asp-for="Student.Gender"
+                        asp-for="Lecturer.Gender"
                       />
                       <label class="form-check-label" for="inlineradio2">female</label>
                     </div>
                 </div>
                                     <div class="mb-4 w-75 d-flex flex-column">
                     <div class="form-outline">
-                        <input asp-for="Student.Email" id="emailInput" class="form-control" type="email"/>
+                        <input asp-for="Lecturer.Email" id="emailInput" class="form-control" type="email"/>
                         <label class="form-label" for="emailInput">Email</label>
                     </div>
-                    <span asp-validation-for="Student.Email" class="text-danger"></span>
+                    <span asp-validation-for="Lecturer.Email" class="text-danger"></span>
                 </div>
                 <div class="mb-4 w-50 d-flex flex-column">
                     <div class="form-outline">
-                        <input asp-for="Student.Password" id="passwordInput" class="form-control">
+                        <input asp-for="Lecturer.Password" id="passwordInput" class="form-control">
                         <label class="form-label" for="passwordInput">Password</label>
                     </div>
-                    <span asp-validation-for="Student.Password" class="text-danger"></span>
+                    <span asp-validation-for="Lecturer.Password" class="text-danger"></span>
                 </div>
                 <div class="mb-4 w-50 d-flex flex-column">
                     <div class="form-outline">
-                        <input asp-for="Student.PhoneNumber" id="phoneNumberInput" class="form-control"/>
+                        <input asp-for="Lecturer.PhoneNumber" id="phoneNumberInput" class="form-control"/>
                         <label class="form-label" for="phoneNumberInput">Phone Number</label>
                     </div>
-                    <span asp-validation-for="@Model.Student.PhoneNumber" class="text-danger"></span>
+                    <span asp-validation-for="@Model.Lecturer.PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="mb-4 d-flex flex-column">
                     <div class="form-outline">
-                        <input asp-for="Student.Address" id="addressInput" class="form-control">
+                        <input asp-for="Lecturer.Address" id="addressInput" class="form-control">
                         <label class="form-label" for="addressInput">Address</label>
                     </div>
-                    <span asp-validation-for="@Model.Student.Address" class="text-danger"></span>
-                </div>
-                <div class="w-25 mb-4 d-flex flex-column">
-                    <select asp-for="Student.ClassId"  id="classSelection" class="mySelect">
-                        @foreach (var c in @Model.ClassList)
-                        {
-                            <option value="@c.ClassId">@c.ClassName</option>
-                        }
-                    </select>
-                    <span asp-validation-for="@Model.Student.Class" class="text-danger"></span>
+                    <span asp-validation-for="@Model.Lecturer.Address" class="text-danger"></span>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>

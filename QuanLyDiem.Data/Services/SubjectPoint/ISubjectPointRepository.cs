@@ -9,5 +9,6 @@ namespace QuanLyDiem.Data.Services
         IEnumerable<SubjectPoint> SubjectList { get; }
         SubjectPoint GetSubjectPointById(int subjectPoint);
         IEnumerable<SubjectPoint> GetSubjectPointByStudentId(int studentId);
+        void UpdateSubjectPoints(SubjectPoint subjectPoint);
     }
 }

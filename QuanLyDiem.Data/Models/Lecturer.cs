@@ -24,5 +24,6 @@ namespace QuanLyDiem.Data.Models
         [StringLength(11)]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
+        public string Address { get; set; }
     }
 }
