@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyDiem.Data;
 using QuanLyDiem.Data.Models;
 using QuanLyDiem.Data.Services;
@@ -17,10 +20,18 @@ namespace QuanLyDiem.Web.Controllers
             this._semesterRepository = semesterRepository;
         }
         // GET
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string searchId)
         {
-            ViewBag.Deleted = TempData["Deleted"] as string;
-            return View(new SubjectManager{SubjectList = _subjectRepository.SubjectList});
+            if (string.IsNullOrEmpty(searchId))
+            {
+                ViewBag.Deleted = TempData["Deleted"] as string;
+                return View(new SubjectManager{SubjectList = _subjectRepository.SubjectList});
+            }
+
+            IEnumerable<Subject> matchSubject = _subjectRepository.SubjectList
+                .Where(s => s.SubjectId.ToString().Contains(searchId)).Select(s => s);
+            return View(new SubjectManager {SubjectList = matchSubject});
         }
 
         public IActionResult Details(int subjectId)

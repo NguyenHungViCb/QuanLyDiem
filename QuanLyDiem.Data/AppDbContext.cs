@@ -15,7 +15,5 @@ namespace QuanLyDiem.Data
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<SubjectPoint> SubjectPoints { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
-        public DbSet<SubjectClass> SubjectClasses { get; set; }
-        public DbSet<SubjectClassDetail> SubjectClassDetails { get; set; }
     }
 }

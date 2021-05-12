@@ -34,7 +34,6 @@ namespace QuanLyDiem.Web
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<ISubjectPointRepository, SubjectPointRepository>();
-            services.AddScoped<ISubjectClassRepository, SubjectClassRepository>();
             services.AddScoped<ILecturerRepository, LecturerRepository>();
             services.AddControllersWithViews();
         }

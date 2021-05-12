@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using QuanLyDiem.Data.Models;
 using QuanLyDiem.Data.Services;
@@ -16,10 +17,18 @@ namespace QuanLyDiem.Web.Controllers
             this._lecturerRepository = lecturerRepository;
         }
         // GET
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string searchId)
         {
             ViewBag.Deleted = TempData["Deleted"] as string;
-            return View(new LecturersManager{LecturerList = _lecturerRepository.LecturerList});
+            if (string.IsNullOrEmpty(searchId))
+            {
+                return View(new LecturersManager{LecturerList = _lecturerRepository.LecturerList});
+            }
+
+            IEnumerable<Lecturer> matchLecturer = _lecturerRepository.LecturerList
+                .Where(l => l.LecturerId.ToString().Contains(searchId)).Select(l => l);
+            return View(new LecturersManager {LecturerList = matchLecturer});
         }
 
         public IActionResult Create()

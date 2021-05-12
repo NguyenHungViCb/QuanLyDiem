@@ -23,15 +23,18 @@
   <div class="main-container w-100 h-100 p-3 rounded">
     <div class="d-flex justify-content-between w-100 align-items-center">
       <div>
+        <form asp-action="Index" method="get">
         <div class="input-group">
-          <div class="form-outline">
-            <input type="search" id="form1" class="form-control"/>
-            <label class="form-label" for="form1">Search</label>
-          </div>
-          <button type="button" class="btn btn-primary">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
+                  <div class="form-outline">
+                    <input type="search" id="form1" class="form-control" name="searchId"/>
+                    <label class="form-label" for="form1">Search</label>
+                  </div>
+                  <button type="button" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>  
+        </form>
+        
       </div>
     </div>
       @if (ViewBag.Deleted != null && ViewBag.Deleted == "true")

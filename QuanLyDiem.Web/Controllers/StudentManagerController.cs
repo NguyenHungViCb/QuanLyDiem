@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using QuanLyDiem.Data;
@@ -25,13 +26,31 @@ namespace QuanLyDiem.Web.Controllers
             return RedirectToAction("StudentList");
         }
 
-        public IActionResult StudentList()
+        [HttpGet]
+        public IActionResult StudentList(string searchId)
         {
-            IEnumerable<Student> studentList = _studentRepositories.StudentList;
-            IEnumerable<Class> classList = _classRepository.ClassList;
-            ViewBag.Deleted = TempData["Deleted"] as string;
-            return View(new StudentDetails{StudentList = studentList,ClassList = classList});
+                IEnumerable<Student> studentList = _studentRepositories.StudentList;
+                IEnumerable<Class> classList = _classRepository.ClassList;
+            if (string.IsNullOrEmpty(searchId))
+            {
+                ViewBag.Deleted = TempData["Deleted"] as string;
+                return View(new StudentDetails{StudentList = studentList,ClassList = classList});
+            }
+            IEnumerable<Student> matchStudent =
+                studentList.Where(s => s.StudentId.ToString().Contains(searchId))
+                    .Select(s => s);
+            return View("StudentList", new StudentDetails{StudentList =matchStudent, ClassList = classList});
         }
+
+        // [HttpPost]
+        // public IActionResult StudentList(int searchId)
+        // {
+        //     IEnumerable<Student> studentList = _studentRepositories.StudentList;
+        //     IEnumerable<Student> matchStudent =
+        //         studentList.Where(s => s.StudentId.ToString().Contains(searchId.ToString()))
+        //             .Select(s => s);
+        //     return RedirectToAction("StudentList", new {studentList = matchStudent});
+        // }
         
         public IActionResult DeleteStudent(int id)
         {
@@ -101,8 +120,5 @@ namespace QuanLyDiem.Web.Controllers
             }
             return View(new StudentDetails { Student = student, ClassList = _classRepository.ClassList });
         }
-
-
-
 }
 }

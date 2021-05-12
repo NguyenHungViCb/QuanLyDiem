@@ -26,10 +26,18 @@ namespace QuanLyDiem.Web.Controllers
             this._subjectRepository = subjectRepository;
         }
         // GET
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string searchId)
         {
-            IEnumerable<Student> studentList = _studentRepository.StudentList;
-            return View(new GradesManager{StudentList = studentList});
+            if (string.IsNullOrEmpty(searchId))
+            {
+                IEnumerable<Student> studentList = _studentRepository.StudentList;
+                return View(new GradesManager{StudentList = studentList});
+            }
+
+            IEnumerable<Student> matchStudent = _studentRepository.StudentList
+                .Where(s => s.StudentId.ToString().Contains(searchId)).Select(s => s);
+            return View(new GradesManager {StudentList = matchStudent});
         }
 
         public IActionResult OverView()
