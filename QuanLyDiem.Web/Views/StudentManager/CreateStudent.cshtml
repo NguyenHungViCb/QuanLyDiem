@@ -1,0 +1,119 @@
+﻿@model QuanLyDiem.Web.ViewModels.StudentDetails
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    
+    <style>
+        .remove{
+                display: none !important;
+        }
+        @@media screen and (min-width:  992px){
+        
+            #form-container{
+                width: 60%;
+            }
+        }
+    </style>
+}
+
+<partial name="_SideBar"/>
+<div class="p-2 flex-grow-1">
+    <div class="main-container w-100 h-100 p-3 rounded">
+        <div class="mb-4">
+            <a asp-action="StudentList">Return to list</a>
+        </div>
+            @if (ViewBag.Success != null && ViewBag.Success == "true")
+            {
+                <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-info text-dark" style="font-width: 700 !important;">
+                    <div>New Question Created! <a asp-action="StudentDetails" asp-route-id="@ViewBag.StudentId">Go to student</a>.</div>
+                    <div id="toggleMessage"><i class="fas fa-times" ></i></div>
+                </div>
+            }
+        <div id="form-container">
+            <form asp-action="CreateStudent" method="post">
+                               <div class="mb-4 d-flex justify-content-between">
+                    <div class="d-flex flex-column">
+                        <div class="form-outline">
+                            <input asp-for="@Model.Student.LastName" type="text" id="questionInput" class="form-control">
+                            <label class="form-label" for="questionInput">LastName</label>
+                        </div>
+                        <span asp-validation-for="@Model.Student.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div class="form-outline" style="margin-left: 0.6rem !important;">
+                            <input asp-for="@Model.Student.FirstName" type="text" id="form2Example1" class="form-control"/>
+                            <label class="form-label" for="form2Example1">FirstName</label>
+                        </div>
+                        <span asp-validation-for="@Model.Student.FirstName" class="text-danger" style="margin-left: 0.6rem !important;"></span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="inlineradio1"
+                        value="true"
+                        asp-for="Student.Gender"
+                        checked
+                      />
+                      <label class="form-check-label" for="inlineradio1">male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="inlineradio2"
+                        value="false"
+                        asp-for="Student.Gender"
+                      />
+                      <label class="form-check-label" for="inlineradio2">female</label>
+                    </div>
+                </div>
+                                    <div class="mb-4 w-75 d-flex flex-column">
+                    <div class="form-outline">
+                        <input asp-for="Student.Email" id="emailInput" class="form-control" type="email"/>
+                        <label class="form-label" for="emailInput">Email</label>
+                    </div>
+                    <span asp-validation-for="Student.Email" class="text-danger"></span>
+                </div>
+                <div class="mb-4 w-50 d-flex flex-column">
+                    <div class="form-outline">
+                        <input asp-for="Student.Password" id="passwordInput" class="form-control">
+                        <label class="form-label" for="passwordInput">Password</label>
+                    </div>
+                    <span asp-validation-for="Student.Password" class="text-danger"></span>
+                </div>
+                <div class="mb-4 w-50 d-flex flex-column">
+                    <div class="form-outline">
+                        <input asp-for="Student.PhoneNumber" id="phoneNumberInput" class="form-control"/>
+                        <label class="form-label" for="phoneNumberInput">Phone Number</label>
+                    </div>
+                    <span asp-validation-for="@Model.Student.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="mb-4 d-flex flex-column">
+                    <div class="form-outline">
+                        <input asp-for="Student.Address" id="addressInput" class="form-control">
+                        <label class="form-label" for="addressInput">Address</label>
+                    </div>
+                    <span asp-validation-for="@Model.Student.Address" class="text-danger"></span>
+                </div>
+                <div class="w-25 mb-4 d-flex flex-column">
+                    <select asp-for="Student.ClassId"  id="classSelection" class="mySelect">
+                        @foreach (var c in @Model.ClassList)
+                        {
+                            <option value="@c.ClassId">@c.ClassName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.Student.Class" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/js/addStudent.js"></script>
+<script>
+ const message = document.getElementById('message');
+ document.getElementById('toggleMessage').addEventListener('click', e=> message.classList.toggle('remove'))
+</script>

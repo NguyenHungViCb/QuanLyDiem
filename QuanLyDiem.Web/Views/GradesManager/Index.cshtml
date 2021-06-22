@@ -1,0 +1,86 @@
+﻿@model QuanLyDiem.Web.ViewModels.GradesManager
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+  
+  <style>
+    thead tr th{
+      font-weight: 700 !important;
+      background-color: #fafafa !important;
+      
+    }
+    thead tr th i{
+      margin-left: 1.2rem !important;
+    }
+        .remove{
+                display: none !important;
+        }
+  </style>
+}
+
+<partial name="_SideBar"/>
+<div class="p-2 flex-grow-1 ">
+  <div class="main-container w-100 h-100 p-3 rounded">
+    <div class="d-flex justify-content-between w-100 align-items-center">
+      <div>
+        <form asp-action="Index" method="get">
+        <div class="input-group">
+          <div class="form-outline">
+            <input type="search" id="form1" class="form-control" name="searchId"/>
+            <label class="form-label" for="form1">Search</label>
+          </div>
+          <button type="button" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>  
+        </form>
+      </div>
+    </div>
+      @if (ViewBag.Deleted != null && ViewBag.Deleted == "true")
+            {
+              <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-danger text-white" style="font-width: 700 !important;">
+                <div>Question Deleted</div>
+                <div id="toggleMessage"><i class="fas fa-times" ></i></div>
+              </div>
+            }    
+      <div class="mt-5">
+        <table class="table table-bordered rounded table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col" class="filter">Họ<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Tên<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Lớp<i class="fas fa-chevron-down"></i></th>
+
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var i in @Model.StudentList)
+          {
+            <tr>
+              <th scope="row">@i.StudentId</th>
+              <td>@i.LastName</td>
+              <td>@i.FirstName</td>
+              <td>@i.Class.ClassName</td>
+              <th class="text-center">
+                <a asp-action="Overview" asp-route-id="@i.StudentId" class="p-2 bg-primary rounded text-white">Details</a>
+              </th>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+
+<script src="~/js/filter.js"></script>
+<script>
+ let subjectPointList = @Html.Raw(Json.Serialize(Model.SubjectPointList))
+ console.log(subjectPointList)
+ const message = document.getElementById('message');
+ if (document.getElementById('toggleMessage')){
+  document.getElementById('toggleMessage').addEventListener('click', e=> message.classList.toggle('remove'))
+ } 
+</script>

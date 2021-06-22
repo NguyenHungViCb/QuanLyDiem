@@ -1,0 +1,75 @@
+﻿@model QuanLyDiem.Web.ViewModels.GradesManager
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@if (@Model == null)
+{
+    <h2>title</h2>
+    return;
+}
+
+<partial name="_LecturerSideBar"/>
+<div class="p-2 flex-grow-1">
+    <div class="main-container w-100 h-100 p-3 rounded">
+        <div class="d-flex justify-content-between w-100 align-items-center">
+            <div>
+                <form asp-action="Index" method="get">
+                    <div class="input-group">
+                        <div class="form-outline">
+                            <input type="search" id="for1" class="form-control" name="searchId"/>
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="button" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mt-5">
+            @* <select name="semester" class="mySelect" id="semester-select"> *@
+            @*     <option value="1">Học kỳ 1</option> *@
+            @*     <option value="2">Học kỳ 2</option> *@
+            @* </select> *@
+            <table class="table table-bordered rounded table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Tên môn học</th>
+                    <th scope="col">Số tín chỉ</th>
+                    <th scope="col">Học kỳ</th>
+                    <th/>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var assignment in @Model.AssignmentList)
+                {
+                    <tr>
+                        <td>@assignment.Subject.SubjectId</td>
+                        <td>@assignment.Subject.SubjectName</td>
+                        <td>@assignment.Subject.CourseLoad</td>
+                        <td>@assignment.Subject.Semester.SemesterName</td>
+                        <td>
+                            <a asp-action="LecturerGMList"  
+                               asp-route-classId="@assignment.Class.ClassId" 
+                               asp-route-subjectId="@assignment.Subject.SubjectId" 
+                               class="p-2 bg-primary rounded text-white">Details</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    console.log(@Html.Raw(Json.Serialize(Model)))
+    const changeSemester=(e)=>{
+        
+    }
+    document.getElementById("semester-select").addEventListener("change",changeSemester)
+</script>

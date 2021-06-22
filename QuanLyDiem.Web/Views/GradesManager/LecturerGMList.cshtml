@@ -1,0 +1,61 @@
+﻿@model QuanLyDiem.Web.ViewModels.GradesManager
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<partial name="_LecturerSideBar"/>
+<div class="p-2 flex-grow-1">
+    <div class="main-container w-100 h-100 p-3 rounded">
+        <div class="">
+            <a asp-action="LecturerGMIndex">Return</a>
+            <div class="rounded-top bg-primary text-white p-3 mt-3">@Model.SubjectPointList.First().Subject.SubjectName</div>
+            <table class="table table-bordered rounded talbe">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Họ tên</th>
+                    <th scope="col">Lớp</th>
+                    <th scope="col">Điểm lần 1</th>
+                    <th scope="col">Điểm lần 2</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var subjectPoint in @Model.SubjectPointList)
+                {
+                    <form id="subjectPointForm" asp-controller="GradesManager" asp-action="LecturerGMList" method="post">
+                        <input asp-for="SubjectPoint.SubjectPointId" value="@subjectPoint.SubjectPointId" hidden/>
+                        <input asp-for="SubjectPoint.StudentId" value="@subjectPoint.StudentId" hidden/>
+                        <input asp-for="SubjectPoint.SubjectId" value="@subjectPoint.SubjectId" hidden/>
+                        <tr>
+                            <td>@subjectPoint.Student.StudentId</td>
+                            <td>@subjectPoint.Student.LastName @subjectPoint.Student.FirstName</td>
+                            <td>@subjectPoint.Student.Class.ClassName</td>
+                            <td>
+                                <input id="firstExam" value="@subjectPoint.FirstExam"
+                                       type="number" step="any" min="0" max="10"
+                                       class="form-control subjectPoint" asp-for="SubjectPoint.FirstExam"/>
+                            </td>
+                            <td>
+                                <input id="secondExam" value="@subjectPoint.SecondExam" 
+                                       type="number" step="any" min="0" max="10"
+                                       class="form-control subjectPoint" asp-for="SubjectPoint.SecondExam"/>
+                            </td>
+                        </tr>
+                    </form>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $('.subjectPoint').change(function (){
+            $('#subjectPointForm').submit();
+        })
+    </script>
+}

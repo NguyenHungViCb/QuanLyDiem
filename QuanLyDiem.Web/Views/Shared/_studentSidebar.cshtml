@@ -1,0 +1,19 @@
+﻿<link rel="stylesheet" href="~/css/sidebar.css"/>
+<nav class="sidebar shadow-2 rounded p-3 m-2">
+    <ul class="px-1">
+        <li class="parent-element rounded">
+            <a asp-controller="GradesManager" asp-action="StudentGMIndex" 
+               class="first-child px-3 d-flex justify-content-between align-items-center">
+               <span><i class="fas fa-user-graduate"></i>Điểm</span>
+            </a>
+        </li>
+        <li class="parent-element rounded">
+            <a asp-controller="StudentManager" asp-action="StudentDetails" 
+               class="first-child px-3 d-flex justify-content-between align-items-center">
+               <span><i class="fas fa-chalkboard-teacher"></i>Tài khoản</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<script src="~/js/sidebar.js"></script>

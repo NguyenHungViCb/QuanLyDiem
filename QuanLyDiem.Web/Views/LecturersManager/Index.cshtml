@@ -1,0 +1,85 @@
+﻿@model QuanLyDiem.Web.ViewModels.LecturersManager
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    <style>
+    thead tr th{
+      font-weight: 700 !important;
+      background-color: #fafafa !important;
+      
+    }
+    thead tr th i{
+      margin-left: 1.2rem !important;
+    }
+        .remove{
+                display: none !important;
+        }
+    </style>
+}
+<link rel="stylesheet" href="~/css/filter.css"/>
+
+<partial name="_SideBar"/>
+<div class="p-2 flex-grow-1 ">
+  <div class="main-container w-100 h-100 p-3 rounded">
+    <div class="d-flex justify-content-between w-100 align-items-center">
+      <div>
+        <form asp-action="Index" method="get">
+        <div class="input-group">
+          <div class="form-outline">
+            <input type="search" id="form1" class="form-control" name="searchId"/>
+            <label class="form-label" for="form1">Search by Id</label>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        </form>
+      </div>
+      <div>
+        <a asp-action="Create" class="btn btn-primary">Add Account</a>
+      </div>
+    </div>
+      @if (ViewBag.Deleted != null && ViewBag.Deleted == "true")
+            {
+              <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-danger text-white" style="font-width: 700 !important;">
+                <div>Lecturer Deleted</div>
+                <div id="toggleMessage"><i class="fas fa-times" ></i></div>
+              </div>
+              
+            }    
+      <div class="mt-5">
+        <table class="table table-bordered rounded table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col" class="filter">Họ<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Tên<i class="fas fa-chevron-down"></i></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var i in @Model.LecturerList)
+          {
+            <tr>
+              <th scope="row">@i.LecturerId</th>
+              <td>@i.LastName</td>
+              <td>@i.FirstName</td>
+              <td >
+                <div class="d-flex justify-content-center">
+                  <a asp-action="Details" asp-route-id="@i.LecturerId" class="bg-primary text-white p-2 rounded-start"><i class="fas fa-edit"></i></a>
+                  <a asp-action="Delete" asp-route-id="@i.LecturerId" class="bg-danger text-white p-2 rounded-end"><i class="fas fa-trash-alt "></i></a>
+                </div>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+
+<script src="~/js/filter.js"></script>
+<script>
+ const message = document.getElementById('message');
+ document.getElementById('toggleMessage') && document.getElementById('toggleMessage').addEventListener('click', e=> message.classList.toggle('remove'))
+</script>

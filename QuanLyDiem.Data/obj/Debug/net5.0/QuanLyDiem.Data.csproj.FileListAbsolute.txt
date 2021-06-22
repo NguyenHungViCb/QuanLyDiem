@@ -1,0 +1,12 @@
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\bin\Debug\net5.0\QuanLyDiem.Data.deps.json
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\bin\Debug\net5.0\QuanLyDiem.Data.dll
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\bin\Debug\net5.0\ref\QuanLyDiem.Data.dll
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\bin\Debug\net5.0\QuanLyDiem.Data.pdb
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\obj\Debug\net5.0\QuanLyDiem.Data.csprojAssemblyReference.cache
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\obj\Debug\net5.0\QuanLyDiem.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\obj\Debug\net5.0\QuanLyDiem.Data.AssemblyInfoInputs.cache
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\obj\Debug\net5.0\QuanLyDiem.Data.AssemblyInfo.cs
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\obj\Debug\net5.0\QuanLyDiem.Data.csproj.CoreCompileInputs.cache
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\obj\Debug\net5.0\QuanLyDiem.Data.dll
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\obj\Debug\net5.0\ref\QuanLyDiem.Data.dll
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Data\obj\Debug\net5.0\QuanLyDiem.Data.pdb

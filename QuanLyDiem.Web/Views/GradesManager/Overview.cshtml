@@ -1,0 +1,111 @@
+﻿@model QuanLyDiem.Web.ViewModels.GradesManager
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+  
+  <style>
+    thead tr th{
+      font-weight: 700 !important;
+      background-color: #fafafa !important;
+      
+    }
+    thead tr th i{
+      margin-left: 1.2rem !important;
+    }
+        .remove{
+                display: none !important;
+        }
+  </style>
+}
+
+<partial name="_SideBar"/>
+<div class="p-2 flex-grow-1 ">
+  <div class="main-container w-100 h-100 p-3 rounded">
+      <div class="mb-4">
+            <a asp-action="Index">Return</a>
+          </div>
+    <div class="d-flex justify-content-between w-100 align-items-center">
+      <div>
+        <div class="form-outline mb-4">
+          <input type="input" id="studentIdInput" class="form-control" disabled value="@Model.Student.StudentId"/>
+          <label class="form-label" for="studentIdInput">Student Id</label>
+        </div>
+        <div class="form-outline mb-4">
+          <input type="input" id="studentIdInput" class="form-control" disabled value="@Model.Student.LastName @Model.Student.FirstName"/>
+          <label class="form-label" for="studentIdInput">Full name</label>
+        </div>
+        <div class="form-outline mb-4">
+          <input type="input" id="studentIdInput" class="form-control" disabled value="@Model.Student.Class.ClassName"/>
+          <label class="form-label" for="studentIdInput">Class</label>
+        </div>
+      </div>
+    </div>
+    <div class="border-top"></div>
+    @if (ViewBag.Deleted != null && ViewBag.Deleted == "true")
+    {
+      <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-danger text-white" style="font-width: 700 !important;">
+        <div>Question Deleted</div>
+        <div id="toggleMessage"><i class="fas fa-times"></i></div>
+      </div>
+
+    }
+    <div class="mt-5">
+      <table class="table table-bordered rounded table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col" class="filter">Môn học</th>
+          <th scope="col" class="filter">Điểm lần 1</th>
+          <th scope="col" class="filter">Điểm lần 2</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var subjectPoint in @Model.SubjectPointList)
+        {
+          
+          <form id="subjectPointForm" asp-controller="GradesManager" 
+                asp-action="Details" method="post">
+            <tr>
+              <input hidden value="@subjectPoint.SubjectPointId" asp-for="SubjectPoint.SubjectPointId"/>
+              <input hidden value="@Model.Student.StudentId" asp-for="SubjectPoint.StudentId"/>
+              <input hidden value="@subjectPoint.SubjectId" asp-for="SubjectPoint.SubjectId"/>
+              <td scope="row">@subjectPoint.Subject.SubjectId</td>
+              <td>@subjectPoint.Subject.SubjectName</td>
+              @* <td>@subjectPoint.FirstExam</td> *@
+              @* <td>@subjectPoint.SecondExam</td> *@
+              <td>
+                <input id="firstExam" value="@subjectPoint.FirstExam"
+                       type="number" step="any" min="0" max="10"
+                       class="form-control subjectPoint" asp-for="SubjectPoint.FirstExam"/>
+              </td>
+              <td>
+                <input id="secondExam" value="@subjectPoint.SecondExam"
+                       type="number" step="any" min="0" max="10"
+                       class="form-control subjectPoint" asp-for="SubjectPoint.SecondExam"/>
+              </td>
+              @* <th > *@
+              @*   <a asp-action="Details" asp-route-studentId="@Model.Student.StudentId" *@
+              @*      asp-route-subjectPointId="@subjectPoint.SubjectPointId" *@
+              @*      class="p-2 bg-primary rounded text-white">Details</a> *@
+              @* </th> *@
+            </tr>
+        </form>
+        }
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<script src="~/js/filter.js"></script>
+@section Scripts
+{
+<script>
+ $('.subjectPoint').change(function (){
+             $('#subjectPointForm').submit();
+         })
+</script>
+}

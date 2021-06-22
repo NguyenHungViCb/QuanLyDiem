@@ -1,0 +1,41 @@
+﻿@model QuanLyDiem.Web.ViewModels.GradesManager
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<partial name="_studentSidebar"/>
+<div class="p-2 flex-grow-1">
+    <div class="main-container w-100 h-100 p-3 rounded">
+        
+        <select id="semester-select" class="mySelect">
+            <option value="1">Học kỳ 1</option>
+            <option value="2">Học kỳ 2</option>
+        </select>
+        <div id="subject-point-container">
+            <partial name="_studentSubjectPointList" model="@Model"/>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function (){
+            $("#semester-select").change(function (){
+                $.ajax({
+                    type:"Get",
+                    url:"/GradesManager/StudentSubjectPointList?semesterId="+$(this).val(),
+                    success: function (data){
+                        $("#subject-point-container").html("")
+                        $("#subject-point-container").html(data)
+                    },
+                    error: function (response){
+                        console.log(response.responseText)
+                    }
+                })
+            })
+        })        
+    </script>
+} 

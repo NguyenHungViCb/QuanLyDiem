@@ -1,0 +1,28 @@
+﻿@model QuanLyDiem.Web.ViewModels.GradesManager
+
+            <table class="table table-bordered rounded talbe mt-3">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Môn học</th>
+                    <th scope="col">Điểm lần 1</th>
+                    <th scope="col">Điểm lần 2</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var subjectPoint in @Model.SubjectPointList)
+                {
+                        <tr>
+                            <td>@subjectPoint.Student.StudentId</td>
+                            <td>@subjectPoint.Subject.SubjectName</td>
+                            <td>
+                                @subjectPoint.FirstExam
+                            </td>
+                            <td>
+                                @subjectPoint.SecondExam
+                            </td>
+                        </tr>
+                }
+                </tbody>
+            </table>
