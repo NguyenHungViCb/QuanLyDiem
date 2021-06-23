@@ -1,0 +1,31 @@
+﻿@model QuanLyDiem.Web.ViewModels.SubjectManager
+
+<table class="table table-bordered rounded table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col" class="filter">Tên lớp<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Tín chỉ<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Học kỳ<i class="fas fa-chevron-down"></i></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var i in @Model.SubjectList)
+          {
+            <tr>
+              <th scope="row">@i.SubjectId</th>
+              <td>@i.SubjectName</td>
+              <th>@i.CourseLoad</th>
+              <th>@i.Semester.SemesterName</th>
+              <th >
+                <div class="d-flex justify-content-center">
+                  <a asp-action="Details" asp-route-subjectId="@i.SubjectId" class="bg-primary text-white p-2 rounded-start"><i class="fas fa-edit"></i></a>
+                  <a asp-action="Delete" asp-route-subjectId="@i.SubjectId" class="bg-danger text-white p-2 rounded-end"><i class="fas fa-trash-alt "></i></a>
+                </div>
+              </th>
+            </tr>
+          }
+          </tbody>
+        </table>
+

@@ -29,47 +29,39 @@
                 </form>
             </div>
         </div>
-        <div class="mt-5">
-            @* <select name="semester" class="mySelect" id="semester-select"> *@
-            @*     <option value="1">Học kỳ 1</option> *@
-            @*     <option value="2">Học kỳ 2</option> *@
-            @* </select> *@
-            <table class="table table-bordered rounded table">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Tên môn học</th>
-                    <th scope="col">Số tín chỉ</th>
-                    <th scope="col">Học kỳ</th>
-                    <th/>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var assignment in @Model.AssignmentList)
-                {
-                    <tr>
-                        <td>@assignment.Subject.SubjectId</td>
-                        <td>@assignment.Subject.SubjectName</td>
-                        <td>@assignment.Subject.CourseLoad</td>
-                        <td>@assignment.Subject.Semester.SemesterName</td>
-                        <td>
-                            <a asp-action="LecturerGMList"  
-                               asp-route-classId="@assignment.Class.ClassId" 
-                               asp-route-subjectId="@assignment.Subject.SubjectId" 
-                               class="p-2 bg-primary rounded text-white">Details</a>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
+        <div class="mt-3">
+            <select name="semester" class="mySelect" id="semester-select">
+                <option value="1">Học kỳ 1</option>
+                <option value="2">Học kỳ 2</option>
+            </select>
+            <div id="subject-container" class="mt-3">
+                <partial name="_lecturerSubjectList" model="@Model"/>
+            </div>
         </div>
     </div>
 </div>
-
-<script>
-    console.log(@Html.Raw(Json.Serialize(Model)))
-    const changeSemester=(e)=>{
-        
-    }
-    document.getElementById("semester-select").addEventListener("change",changeSemester)
+@section Scripts
+{
+    <script>
+    // console.log(@Html.Raw(Json.Serialize(Model)))
+    // const changeSemester=(e)=>{
+    //    
+    // }
+    // document.getElementById("semester-select").addEventListener("change",changeSemester)
+    $(function (){
+        $("#semester-select").change(function (){
+            $.ajax({
+                type:"Get",
+                url:"/GradesManager/LecturerSubjectList?semesterId="+$(this).val(),
+                success:function (data){
+                    $("#subject-container").html("")
+                    $("#subject-container").html(data)
+                },
+                error:function (response){
+                    console.log(response.responseText)
+                }
+            })
+        })
+    })
 </script>
+}

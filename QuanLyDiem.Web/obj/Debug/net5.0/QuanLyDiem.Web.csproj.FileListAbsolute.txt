@@ -220,3 +220,6 @@ C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Web\obj\Debug\net5.0\Razo
 C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Web\obj\Debug\net5.0\Razor\Views\GradesManager\StudentGMIndex.cshtml.g.cs
 C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Web\obj\Debug\net5.0\Razor\Views\Shared\_studentSubjectPointList.cshtml.g.cs
 C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Web\obj\Debug\net5.0\Razor\Views\Shared\_studentSidebar.cshtml.g.cs
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Web\obj\Debug\net5.0\Razor\Views\Shared\_lecturerSubjectList.cshtml.g.cs
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Web\obj\Debug\net5.0\Razor\Views\Shared\_subjectList.cshtml.g.cs
+C:\Users\nick\Documents\Camtasia\QuanLyDiem\QuanLyDiem.Web\obj\Debug\net5.0\Razor\Views\Shared\Components\BreadScrums\Default.cshtml.g.cs

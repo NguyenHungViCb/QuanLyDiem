@@ -54,6 +54,7 @@
             <th scope="col">Id</th>
             <th scope="col" class="filter">Họ<i class="fas fa-chevron-down"></i></th>
             <th scope="col" class="filter">Tên<i class="fas fa-chevron-down"></i></th>
+            <th scope="col" class="filter">Email<i class="fas fa-chevron-down"></i></th>
             <th></th>
           </tr>
           </thead>
@@ -64,6 +65,7 @@
               <th scope="row">@i.LecturerId</th>
               <td>@i.LastName</td>
               <td>@i.FirstName</td>
+              <td>@i.Email</td>
               <td >
                 <div class="d-flex justify-content-center">
                   <a asp-action="Details" asp-route-id="@i.LecturerId" class="bg-primary text-white p-2 rounded-start"><i class="fas fa-edit"></i></a>

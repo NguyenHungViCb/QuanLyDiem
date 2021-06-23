@@ -29,13 +29,12 @@ namespace QuanLyDiem.Data.Services
             return _appDbContext.Assignments.FirstOrDefault(a => a.AssignmentId == assignmentId);
         }
 
-        public IEnumerable<Assignment> GetAssignmentListByLecturer(int lecturerId)
+        public IEnumerable<Assignment> GetAssignmentListByLecturer(int lecturerId, int semesterId)
         {
             return _appDbContext.Assignments
                 .Include(a => a.Subject)
                 .Include(a => a.Subject.Semester)
-                .Include(a => a.Class)
-                .Where(a => a.LecturerId == lecturerId)
+                .Where(a => a.LecturerId == lecturerId && a.Subject.Semester.SemesterId == semesterId)
                 .Select(a => a);
         }
     }

@@ -7,6 +7,6 @@ namespace QuanLyDiem.Data.Services
     {
         IEnumerable<Assignment>  AssignmentLList { get; }
         Assignment GetAssignmentById(int assignmentId);
-        IEnumerable<Assignment> GetAssignmentListByLecturer(int lecturerId);
+        IEnumerable<Assignment> GetAssignmentListByLecturer(int lecturerId, int semesterId);
     }
 }

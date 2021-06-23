@@ -3,7 +3,7 @@
     <ul class="px-1">
         <li class="parent-element rounded">
             <a  id="student" class="first-child px-3 d-flex justify-content-between align-items-center">
-               <span ><i class="fas fa-user-graduate"></i>Sinh Viên</span><i class="fas fa-chevron-down rotate"></i>
+               <span><i class="fas fa-user-graduate"></i>Sinh Viên</span><i class="fas fa-chevron-down rotate"></i>
             </a>
             <ul class="child-element slideup">
                 <li><a asp-controller="StudentManager" asp-action="StudentList">Danh sách sinh viên</a></li>
@@ -25,7 +25,6 @@
             </a>
             <ul class="child-element slideup">
                 <li><a asp-controller="SubjectManager" asp-action="Index">Danh sách môn học</a></li>
-                <li><a href="#"></a> </li>
             </ul>
         </li>
         
@@ -37,6 +36,7 @@
     document.querySelector(".active") ? document.querySelector(".active").classList.remove("active"):""
     switch ("@ViewContext.RouteData.Values["controller"]?.ToString()"){
         case "GradeManager":
+            console.log("student")
             document.getElementById("student").setAttribute("color","#0d6efd")
             break;
         case "StudentManager":

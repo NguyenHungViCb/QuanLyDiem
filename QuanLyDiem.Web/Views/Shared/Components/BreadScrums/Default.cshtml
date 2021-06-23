@@ -1,0 +1,24 @@
+﻿@model QuanLyDiem.Web.ViewModels.BreadScrumsViewModel
+
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                @{
+                    for (int i = 1; i < Model.Paths.Count(); i++)
+                    {
+                        <li class="breadcrumb-item"><a>@Model.Paths.ElementAt(i)</a></li>    
+                    }
+                }
+                @* <li class="breadcrumb-item"><a href="#">Home</a></li> *@
+                @* <li class="breadcrumb-item"><a href="#">Library</a></li> *@
+                @* <li class="breadcrumb-item active" aria-current="page"><a href="#">Data</a></li> *@
+            </ol>
+        </nav>
+    </div>
+
+@section Scripts
+{
+    <script>
+        console.log(@Html.Raw(Json.Serialize(Model)))
+    </script>
+}

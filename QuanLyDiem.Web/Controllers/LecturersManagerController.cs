@@ -20,13 +20,15 @@ namespace QuanLyDiem.Web.Controllers
         private readonly ILecturerRepository _lecturerRepository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         public LecturersManagerController(ILecturerRepository lecturerRepository, UserManager<IdentityUser> userManager, 
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager)
         {
             this._lecturerRepository = lecturerRepository;
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
         }
         // GET
         [HttpGet]
@@ -121,14 +123,24 @@ namespace QuanLyDiem.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator,Lecturer")]
-        public IActionResult Details(Lecturer lecturer)
+        public async Task<IActionResult> Details(Lecturer lecturer)
         {
             if (ModelState.IsValid)
             {
-                _lecturerRepository.UpdateLecturer(lecturer);
-                return RedirectToAction("Details", new {id = lecturer.LecturerId});
+                Lecturer existing = _lecturerRepository.GetLecturerById(lecturer.LecturerId);
+                var user = await _userManager.FindByEmailAsync(existing.Email);
+                if (user != null)
+                {
+                    user.Email = lecturer.Email;
+                    IdentityResult result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        _lecturerRepository.UpdateLecturer(lecturer);
+                        await _signInManager.PasswordSignInAsync(user, lecturer.Password, false, false);
+                        return RedirectToAction("Details", new {id = lecturer.LecturerId});
+                    }
+                }
             }
-
             return View(new LecturersManager {Lecturer = lecturer});
         }
 

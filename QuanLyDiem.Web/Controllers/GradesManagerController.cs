@@ -61,11 +61,29 @@ namespace QuanLyDiem.Web.Controllers
                 Lecturer lecturer = _lecturerRepository.GetLecturerByEmail(email);
 
                 IEnumerable<Assignment> assignmentList =
-                    _assignmentRepository.GetAssignmentListByLecturer(lecturer.LecturerId);
+                    _assignmentRepository.GetAssignmentListByLecturer(lecturer.LecturerId, semesterId);
                 
                 return View(new GradesManager{AssignmentList = assignmentList});
             }
             return View(null);
+        }
+
+        [Authorize(Roles = "Administrator,Lecturer")]
+        public IActionResult LecturerSubjectList(int semesterId = 1)
+        {
+            var email = this.User.FindFirstValue(ClaimTypes.Email);
+            var role = this.User.FindFirstValue(ClaimTypes.Role);
+            if (email != null && role == "Lecturer")
+            {
+                Lecturer lecturer = _lecturerRepository.GetLecturerByEmail(email);
+            
+                IEnumerable<Assignment> assignmentList =
+                    _assignmentRepository.GetAssignmentListByLecturer(lecturer.LecturerId, semesterId);
+                return PartialView("_lecturerSubjectList",
+                    new GradesManager {AssignmentList = assignmentList});
+            }
+                        
+            return PartialView("_NotFound");
         }
 
         [Authorize(Roles = "Administrator,Lecturer")]

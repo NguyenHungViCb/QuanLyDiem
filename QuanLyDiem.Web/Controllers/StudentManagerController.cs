@@ -182,7 +182,6 @@ namespace QuanLyDiem.Web.Controllers
                 {
                     _studentRepositories.UpdateStudent(student);
                     await _signInManager.PasswordSignInAsync(user, student.Password, false, false);
-                    // return View(new StudentDetails{Student = student, ClassList = _classRepository.ClassList});
                     return RedirectToAction("StudentDetails", student.StudentId);
                 }
 

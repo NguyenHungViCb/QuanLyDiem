@@ -23,17 +23,27 @@ namespace QuanLyDiem.Web.Controllers
         }
         // GET
         [HttpGet]
-        public IActionResult Index(string searchId)
+        public IActionResult Index(string searchId, int semesterId = 1)
         {
             if (string.IsNullOrEmpty(searchId))
             {
                 ViewBag.Deleted = TempData["Deleted"] as string;
-                return View(new SubjectManager{SubjectList = _subjectRepository.SubjectList});
+                return View(new SubjectManager
+                {
+                    SubjectList = _subjectRepository.SubjectList.Where(s=>s.SemesterId == semesterId)
+                });
             }
 
             IEnumerable<Subject> matchSubject = _subjectRepository.SubjectList
-                .Where(s => s.SubjectId.ToString().Contains(searchId)).Select(s => s);
+                .Where(s => s.SubjectId.ToString().Contains(searchId) 
+                            && s.SemesterId == semesterId).Select(s => s);
             return View(new SubjectManager {SubjectList = matchSubject});
+        }
+
+        public IActionResult SubjectList(int semesterId = 1)
+        {
+            return PartialView("_subjectList",new SubjectManager
+                {SubjectList = _subjectRepository.SubjectList.Where(s => s.SemesterId == semesterId)});
         }
 
         public IActionResult Details(int subjectId)
