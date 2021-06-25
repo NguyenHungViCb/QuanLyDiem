@@ -2,16 +2,18 @@
 
     <div class="container-fluid">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb" style="font-size: 13px">
                 @{
                     for (int i = 1; i < Model.Paths.Count(); i++)
                     {
-                        <li class="breadcrumb-item"><a>@Model.Paths.ElementAt(i)</a></li>    
+                        <li class="breadcrumb-item">
+                            <a asp-controller="@Model.Paths.ElementAt(1)"
+                               asp-action="@(  Model.Paths.Count() >=3 ? Model.Paths.ElementAt(2):"" )">
+                                @Model.Paths.ElementAt(i)
+                            </a>
+                        </li>    
                     }
                 }
-                @* <li class="breadcrumb-item"><a href="#">Home</a></li> *@
-                @* <li class="breadcrumb-item"><a href="#">Library</a></li> *@
-                @* <li class="breadcrumb-item active" aria-current="page"><a href="#">Data</a></li> *@
             </ol>
         </nav>
     </div>

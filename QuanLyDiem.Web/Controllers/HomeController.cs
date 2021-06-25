@@ -38,6 +38,9 @@ namespace QuanLyDiem.Web.Controllers
                 }else if (currentUser.IsInRole("Lecturer"))
                 {
                     return RedirectToAction("LecturerGMIndex", "GradesManager");
+                }else if (currentUser.IsInRole("Student"))
+                {
+                    return RedirectToAction("StudentGMIndex", "GradesManager");
                 }
             }
             return View();
@@ -56,7 +59,8 @@ namespace QuanLyDiem.Web.Controllers
 
             if (user != null)
             {
-                var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password,false,false);
+                var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password,
+                    false,false);
                 if (result.Succeeded)
                 {
                     IEnumerable<String> roles = await _userManager.GetRolesAsync(user);
@@ -77,6 +81,8 @@ namespace QuanLyDiem.Web.Controllers
             ModelState.AddModelError("", "Username/password not found");
             return View(loginViewModel);
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> Logout()

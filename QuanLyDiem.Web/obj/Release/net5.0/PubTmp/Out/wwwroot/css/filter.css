@@ -1,0 +1,8 @@
+﻿.filter i{
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.filter .rotate{
+    transform: rotate(-180deg);
+}

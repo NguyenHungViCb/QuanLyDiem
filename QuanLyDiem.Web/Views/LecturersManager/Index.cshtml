@@ -5,7 +5,6 @@
     <style>
     thead tr th{
       font-weight: 700 !important;
-      background-color: #fafafa !important;
       
     }
     thead tr th i{
@@ -20,7 +19,7 @@
 
 <partial name="_SideBar"/>
 <div class="p-2 flex-grow-1 ">
-  <div class="main-container w-100 h-100 p-3 rounded">
+  <div class="main-container w-100 h-100 p-3 rounded neumorphic-container">
     <div class="d-flex justify-content-between w-100 align-items-center">
       <div>
         <form asp-action="Index" method="get">
@@ -29,14 +28,14 @@
             <input type="search" id="form1" class="form-control" name="searchId"/>
             <label class="form-label" for="form1">Search by Id</label>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn neumorphic-btn flat">
             <i class="fas fa-search"></i>
           </button>
         </div>
         </form>
       </div>
       <div>
-        <a asp-action="Create" class="btn btn-primary">Add Account</a>
+        <a asp-action="Create" class="btn neumorphic-btn text-primary btn-sm">Add Account</a>
       </div>
     </div>
       @if (ViewBag.Deleted != null && ViewBag.Deleted == "true")
@@ -48,7 +47,7 @@
               
             }    
       <div class="mt-5">
-        <table class="table table-bordered rounded table-striped">
+        <table class="neumorphic">
           <thead>
           <tr>
             <th scope="col">Id</th>
@@ -67,9 +66,12 @@
               <td>@i.FirstName</td>
               <td>@i.Email</td>
               <td >
-                <div class="d-flex justify-content-center">
-                  <a asp-action="Details" asp-route-id="@i.LecturerId" class="bg-primary text-white p-2 rounded-start"><i class="fas fa-edit"></i></a>
-                  <a asp-action="Delete" asp-route-id="@i.LecturerId" class="bg-danger text-white p-2 rounded-end"><i class="fas fa-trash-alt "></i></a>
+                <div class="d-inline-flex justify-content-center neumorphic-group-btn rounded">
+                  <a asp-action="Details" asp-route-id="@i.LecturerId" 
+                     class="neumorphic-btn text-primary p-2 rounded-start"><i class="fas fa-edit text-primary"></i></a>
+                  <a asp-action="Delete" asp-route-id="@i.LecturerId" 
+                     onclick="return confirm('Do you really want to delete this user?');"
+                     class="neumorphic-btn text-danger p-2 rounded-end"><i class="fas fa-trash-alt text-danger"></i></a>
                 </div>
               </td>
             </tr>

@@ -68,5 +68,15 @@ namespace QuanLyDiem.Data.Services
                 _appDbContext.SaveChanges();
             }
         }
+
+        public void ResetPassword(int studentId,string password)
+        {
+            Student existing = GetStudentById(studentId);
+            if(existing != null)
+            {
+                existing.Password = password;
+                _appDbContext.SaveChanges();
+            }
+        }
     }
 }

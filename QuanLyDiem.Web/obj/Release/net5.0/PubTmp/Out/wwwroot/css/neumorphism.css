@@ -1,0 +1,120 @@
+﻿.neumorphic-container{
+    background: #e6e7ee;
+    color: #44476A;
+    box-shadow: 6px 6px 12px #b8b9be,-6px -6px 12px #fff!important;
+}
+
+.neumorphic-btn{
+    background: #E6E7ED;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+    /*color: #31344b;*/
+}
+
+.neumorphic-group-btn{
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+}
+
+.neumorphic-group-btn .neumorphic-btn{
+    box-shadow: none;
+}
+
+.neumorphic-btn.flat{
+    background: #E6E7ED;
+    box-shadow: none;
+    border: 1px solid #bcbcbc;
+}
+
+.neumorphic-btn:active{
+    background: #E6E7ED;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+    color: #31344b;
+}
+
+.form-outline .form-control, .form-control{
+    background: #E6E7ED;
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
+}
+
+.form-control:focus{
+    background: #E6E7ED;
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
+}
+
+.form-outline .form-control:focus{
+    background: #E6E7ED;
+    box-shadow: inset 5px 5px 5px #b8b9be, inset -6px -6px 7px #fff !important;
+}
+
+.neumorphic-btn:hover{
+    background: #E6E7ED;
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+}
+
+table.neumorphic{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 2px;
+    border-color: grey;
+    /*color: #212121;*/
+    color: #44476A;
+    text-align: center;
+    overflow: hidden;
+    /*box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),*/
+    /*-9px -9px 16px rgba(255, 255, 255, 0.6);*/
+    border-radius: 0.3rem !important;
+    box-shadow: 6px 6px 12px #b8b9be,-6px -6px 12px #fff !important;
+}
+
+table.neumorphic th{
+    padding: 7px;
+}
+
+table.neumorphic>tbody>tr>td {
+    padding: 10px;
+    font-size: 14px;
+    position: relative;
+}
+
+
+table.neumorphic>tbody>tr:hover {
+    padding: 20px;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+    -9px -9px 16px rgba(255, 255, 255, 0.6);
+}
+
+table.neumorphic tr td:first-child::before {
+    content: "";
+    position: absolute;
+    padding: 7px;
+    top: 0;
+    left: -5000px;
+    width: 10000px;
+    height: 100%;
+    z-index: -10;
+}
+
+table.neumorphic td:hover::after {
+    content: "";
+    position: absolute;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+    -9px -9px 16px rgba(255, 255, 255, 0.6);
+    left: 0;
+    top: -5000px;
+    height: 10000px;
+    width: 100%;
+    z-index: -1;
+}
+
+table.neumorphic.sub-head{
+    box-shadow: none !important;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+table.neumorphic thead{
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6);
+}
+
+table.neumorphic.sub-head thead{
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6);
+}

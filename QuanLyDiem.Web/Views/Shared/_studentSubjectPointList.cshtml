@@ -1,28 +1,75 @@
 ﻿@model QuanLyDiem.Web.ViewModels.GradesManager
 
-            <table class="table table-bordered rounded talbe mt-3">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Môn học</th>
-                    <th scope="col">Điểm lần 1</th>
-                    <th scope="col">Điểm lần 2</th>
-                </tr>
-                </thead>
-                <tbody>
+@{
+    Double finalTotal = 0;
+    if (Model.SubjectPointList != null || Model.SubjectPointList.Any())
+    {
+        finalTotal = Math.Round(Model.SubjectPointList.Sum(sp => sp.FirstExam * 30 / 100 
+                                                                     + sp.SecondExam * 70 / 100)/Model.SubjectPointList.Count(),2);
+    }
+}
+<div id="rank" class="neumorphic-container p-3" style="border-radius: 0.3rem">
+    <div class="rank-child">Điểm tổng kết: @finalTotal</div>
+    <div class="mt-2 mb-2 break" style="border-top: 1px solid #bcbcbc"></div>
+    <div class="rank-child">
+        @if (finalTotal >= 8.4)
+        {
+            <div>Xếp loại: Giỏi</div>
+        }
+        else if (finalTotal >= 7)
+        {
+            <div>Xếp loại: Khá</div>
+        }
+        else if (finalTotal >= 5)
+        {
+            <div>Xếp loại: Trung bình</div>
+        }
+        else if (finalTotal == 0 && (Model.SubjectPointList == null || !Model.SubjectPointList.Any()))
+        {
+            <div>Xếp loại: Chưa có</div>
+        }
+        else
+        {
+            <div>Xếp loại: Yếu</div>
+        }
+    </div>
+</div>
+<table class="neumorphic mt-4">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Môn học</th>
+        <th scope="col">Điểm lần 1</th>
+        <th scope="col">Điểm lần 2</th>
+        <th scope="col">Điểm tổng kết</th>
+        @* <th scope="col">Phân loại</th> *@
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.SubjectPointList == null || !Model.SubjectPointList.Any())
+    {
+        return;
+    }
 
-                @foreach (var subjectPoint in @Model.SubjectPointList)
-                {
-                        <tr>
-                            <td>@subjectPoint.Student.StudentId</td>
-                            <td>@subjectPoint.Subject.SubjectName</td>
-                            <td>
-                                @subjectPoint.FirstExam
-                            </td>
-                            <td>
-                                @subjectPoint.SecondExam
-                            </td>
-                        </tr>
-                }
-                </tbody>
-            </table>
+    @foreach (var subjectPoint in @Model.SubjectPointList)
+    {
+        Double total = @Math.Round(@subjectPoint.FirstExam * 30 / 100
+                                   + @subjectPoint.SecondExam * 70 / 100, 2);
+        <tr>
+            <td>@subjectPoint.SubjectPointId</td>
+            <td>@subjectPoint.Subject.SubjectName</td>
+            <td>
+                @subjectPoint.FirstExam
+            </td>
+            <td>
+                @subjectPoint.SecondExam
+            </td>
+            <td>
+                @total
+            </td>
+            @* <td> *@
+            @* </td> *@
+        </tr>
+    }
+    </tbody>
+</table>

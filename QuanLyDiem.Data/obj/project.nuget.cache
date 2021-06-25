@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8G+SwqMLBedIkmPlxuYBk9rRGW2C1YNYSBJGBgBETjFRG+EC2YS/3Y/jOIwPKiJ29VvVtSduijn9OvCEzleJIw==",
+  "dgSpecHash": "kkQMVSzB2JtisVxarMR+pACcjnJabZkeZCIfHb2nI7C2+jMhBYevOrWHy3IeP8ccwvAK1wvRfmG8Ha1RT3oZiQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nick\\Documents\\Camtasia\\QuanLyDiem\\QuanLyDiem.Data\\QuanLyDiem.Data.csproj",
+  "projectFilePath": "C:\\Users\\nick\\Downloads\\QuanLyDiem\\QuanLyDiem\\QuanLyDiem.Data\\QuanLyDiem.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nick\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

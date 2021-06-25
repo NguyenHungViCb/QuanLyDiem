@@ -7,8 +7,6 @@
   <style>
     thead tr th{
       font-weight: 700 !important;
-      background-color: #fafafa !important;
-      
     }
     thead tr th i{
       margin-left: 1.2rem !important;
@@ -21,8 +19,8 @@
 
 <partial name="_SideBar"/>
 <div class="p-2 flex-grow-1 ">
-  <div class="main-container w-100 h-100 p-3 rounded">
-    <div class="d-flex justify-content-between w-100 align-items-center">
+  <div class="main-container w-100 h-100 p-3 rounded neumorphic-container">
+    <div class="d-flex justify-content-between w-100 align-items-center ">
       <div>
         <form asp-action="Index" method="get">
         <div class="input-group">
@@ -30,7 +28,7 @@
             <input type="search" id="form1" class="form-control" name="searchId"/>
             <label class="form-label" for="form1">Search</label>
           </div>
-          <button type="button" class="btn btn-primary">
+          <button type="button" class="btn neumorphic-btn flat">
             <i class="fas fa-search"></i>
           </button>
         </div>  
@@ -45,14 +43,13 @@
               </div>
             }    
       <div class="mt-5">
-        <table class="table table-bordered rounded table-striped">
+        <table class="neumorphic">
           <thead>
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col" class="filter">Họ<i class="fas fa-chevron-down"></i></th>
-            <th scope="col" class="filter">Tên<i class="fas fa-chevron-down"></i></th>
-            <th scope="col" class="filter">Lớp<i class="fas fa-chevron-down"></i></th>
-
+            <th>Id</th>
+            <th class="filter">Họ<i class="fas fa-chevron-down"></i></th>
+            <th class="filter">Tên<i class="fas fa-chevron-down"></i></th>
+            <th class="filter">Lớp<i class="fas fa-chevron-down"></i></th>
             <th></th>
           </tr>
           </thead>
@@ -60,12 +57,13 @@
           @foreach (var i in @Model.StudentList)
           {
             <tr>
-              <th scope="row">@i.StudentId</th>
+              <th>@i.StudentId</th>
               <td>@i.LastName</td>
               <td>@i.FirstName</td>
               <td>@i.Class.ClassName</td>
               <th class="text-center">
-                <a asp-action="Overview" asp-route-id="@i.StudentId" class="p-2 bg-primary rounded text-white">Details</a>
+                <a asp-action="Overview" asp-route-id="@i.StudentId" 
+                   class="btn neumorphic-btn rounded text-primary">Details</a>
               </th>
             </tr>
           }

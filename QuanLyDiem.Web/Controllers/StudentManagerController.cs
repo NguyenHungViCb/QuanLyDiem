@@ -193,5 +193,37 @@ namespace QuanLyDiem.Web.Controllers
             ModelState.AddModelError("","User not found");
             return View(new StudentDetails { Student = student, ClassList = _classRepository.ClassList });
         }
+        //[HttpPost]
+        //[Authorize(Roles ="Administrator, Student")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> ResetPassword(int studentId,string password, string newPassword)
+        //{
+        //    var role = this.User.FindFirstValue(ClaimTypes.Role);
+        //    Student existing = null;
+        //    IdentityUser user = null;
+        //    if(role == "Student")
+        //    {
+        //        var email = this.User.FindFirstValue(ClaimTypes.Email);
+        //        existing = _studentRepositories.GetStudentByEmail(email);
+        //        user = await _userManager.FindByEmailAsync(existing.Email);
+        //    }
+        //    else
+        //    {
+        //        existing = _studentRepositories.GetStudentById(studentId);
+        //        user = await _userManager.FindByEmailAsync(existing.Email);
+        //    }
+        //    if(user != null && existing != null)
+        //    {
+        //        if(await _userManager.CheckPasswordAsync(user, password))
+        //        {
+        //            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+        //            await _userManager.ResetPasswordAsync(user, resetToken, newPassword);
+        //            _studentRepositories.ResetPassword(existing.StudentId, newPassword);
+        //            return RedirectToAction("StudentDetails",existing.StudentId);
+        //        }
+        //        ModelState.AddModelError("", "Wrong Password");
+        //    }
+        //            return RedirectToAction("StudentDetails",existing.StudentId);
+        //}
 }
 }

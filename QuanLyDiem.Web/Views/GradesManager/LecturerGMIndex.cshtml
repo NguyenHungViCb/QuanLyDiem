@@ -10,10 +10,9 @@
     <h2>title</h2>
     return;
 }
-
 <partial name="_LecturerSideBar"/>
 <div class="p-2 flex-grow-1">
-    <div class="main-container w-100 h-100 p-3 rounded">
+    <div class="main-container w-100 h-100 p-3 rounded neumorphic-container">
         <div class="d-flex justify-content-between w-100 align-items-center">
             <div>
                 <form asp-action="Index" method="get">
@@ -22,7 +21,7 @@
                             <input type="search" id="for1" class="form-control" name="searchId"/>
                             <label class="form-label" for="form1">Search</label>
                         </div>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn neumorphic-btn flat">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -43,11 +42,6 @@
 @section Scripts
 {
     <script>
-    // console.log(@Html.Raw(Json.Serialize(Model)))
-    // const changeSemester=(e)=>{
-    //    
-    // }
-    // document.getElementById("semester-select").addEventListener("change",changeSemester)
     $(function (){
         $("#semester-select").change(function (){
             $.ajax({

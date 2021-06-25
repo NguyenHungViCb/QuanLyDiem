@@ -1,30 +1,36 @@
 ﻿@model QuanLyDiem.Web.ViewModels.GradesManager
 
-<table class="table table-bordered rounded table">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Tên môn học</th>
-                    <th scope="col">Số tín chỉ</th>
-                    <th scope="col">Học kỳ</th>
-                    <th/>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var assignment in @Model.AssignmentList)
-                {
-                    <tr>
-                        <td>@assignment.Subject.SubjectId</td>
-                        <td>@assignment.Subject.SubjectName</td>
-                        <td>@assignment.Subject.CourseLoad</td>
-                        <td>@assignment.Subject.Semester.SemesterName</td>
-                        <td>
-                            <a asp-action="LecturerGMList"  
-                               asp-route-subjectId="@assignment.Subject.SubjectId" 
-                               class="p-2 bg-primary rounded text-white">Details</a>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
+<table class="neumorphic">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Tên môn học</th>
+        <th scope="col">Số tín chỉ</th>
+        <th scope="col">Học kỳ</th>
+        <th/>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        if (Model.AssignmentList == null || !Model.AssignmentList.Any())
+        {
+            return;
+        }
+        foreach (var assignment in @Model.AssignmentList)
+        {
+            <tr>
+                <td>@assignment.Subject.SubjectId</td>
+                <td>@assignment.Subject.SubjectName</td>
+                <td>@assignment.Subject.CourseLoad</td>
+                <td>@assignment.Subject.Semester.SemesterName</td>
+                <td>
+                    <a asp-action="LecturerGMList"
+                       asp-route-subjectId="@assignment.Subject.SubjectId"
+                       class="p-2 neumorphic-btn text-primary rounded">Details</a>
+                </td>
+            </tr>
+        }
+    }
 
+    </tbody>
+</table>

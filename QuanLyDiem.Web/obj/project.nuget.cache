@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZF+6FB7kPCbuOLfAyK9+7lIwKhXt1BuO+IyVXXUQkBYvADnajtP6atIdv0L4SsuC+8+jPm9soonn3qkT1nDpXQ==",
+  "dgSpecHash": "NNqi/LVuoJg+q/HfniEokj1lm22QA1umU1GK4R1n33xSKCr6vwq6I9Hrvh2lRThIwLq3bDItL/s1KIgAIa2G2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nick\\Documents\\Camtasia\\QuanLyDiem\\QuanLyDiem.Web\\QuanLyDiem.Web.csproj",
+  "projectFilePath": "C:\\Users\\nick\\Downloads\\QuanLyDiem\\QuanLyDiem\\QuanLyDiem.Web\\QuanLyDiem.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nick\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

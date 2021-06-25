@@ -6,12 +6,17 @@
 }
 
 <partial name="_studentSidebar"/>
-<div class="p-2 flex-grow-1">
-    <div class="main-container w-100 h-100 p-3 rounded">
-        <select id="semester-select" class="mySelect">
-            <option value="1">Học kỳ 1</option>
-            <option value="2">Học kỳ 2</option>
-        </select>
+<div class="p-2 flex-grow-1 ">
+    <div class="main-container w-100 h-100 p-3 rounded neumorphic-container">
+        <div class="mb-4 d-flex justify-content-between">
+            <select id="semester-select" class="mySelect">
+                <option value="1">Học kỳ 1</option>
+                <option value="2">Học kỳ 2</option>
+            </select>
+            <button id="print-table" class="btn neumorphic-btn text-primary btn-sm" style="font-weight: 700">
+                In danh sách điểm
+            </button>
+        </div>
         <div id="subject-point-container">
             <partial name="_studentSubjectPointList" model="@Model"/>
         </div>
@@ -36,5 +41,51 @@
                 })
             })
         })        
+        var myApp;
+        myApp = (function (app) {
+            $('#print-table').click(function () {
+               myApp.print();
+            });
+        
+            app.print = function () {
+                $.ajax({
+                    type:"Get",
+                    url: '/GradesManager/StudentSubjectPointList?semesterId='+$("#semester-select").val(),
+                    success: function (data) {
+                        if (myApp.arePopupsBlocked()) {
+                            alert('Please allow popups.');
+                        }
+                        var printWindow = window.open();
+                        if (printWindow) {
+                            $(printWindow.document.head).html("<style>"+
+                            "#rank{border: 1px solid black;margin-bottom: 1.2rem;}"+
+                            ".rank-child{padding: 0.6rem;}"+
+                            "table{width: 100%;} table, th, tr, td{border: 1px solid black;border-collapse: collapse;} " +
+                             "th{background-color: black;color: white; font-weight: 700;} th,td{padding: 0.3rem;}"
+                             +"</style>")
+                            $(printWindow.document.body).html(data);
+                            printWindow.print()
+        
+                        } else {
+                            alert('Please allow popups.');
+                        }
+                    },
+                    error: function () {
+                        alert('Error');
+                    }
+                });
+            };
+        
+            app.arePopupsBlocked = function () {
+                var aWindow = window.open(null, "", "width=1,height=1");
+                try {
+                    aWindow.close();
+                    return false;
+                } catch (e) {
+                    return true;
+                }
+            };
+            return app;
+        })(window.myApp || {})
     </script>
 } 

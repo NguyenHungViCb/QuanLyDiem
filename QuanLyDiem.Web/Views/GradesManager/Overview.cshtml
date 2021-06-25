@@ -7,8 +7,6 @@
   <style>
     thead tr th{
       font-weight: 700 !important;
-      background-color: #fafafa !important;
-      
     }
     thead tr th i{
       margin-left: 1.2rem !important;
@@ -20,13 +18,13 @@
 }
 
 <partial name="_SideBar"/>
-<div class="p-2 flex-grow-1 ">
-  <div class="main-container w-100 h-100 p-3 rounded">
-      <div class="mb-4">
+<div class="p-2 flex-grow-1" id="subject-point-list">
+  <div class="main-container w-100 h-100 p-3 rounded neumorphic-container">
+      <div class="mb-4" id="return-btn">
             <a asp-action="Index">Return</a>
           </div>
     <div class="d-flex justify-content-between w-100 align-items-center">
-      <div>
+      <div id="student-info">
         <div class="form-outline mb-4">
           <input type="input" id="studentIdInput" class="form-control" disabled value="@Model.Student.StudentId"/>
           <label class="form-label" for="studentIdInput">Student Id</label>
@@ -41,7 +39,8 @@
         </div>
       </div>
     </div>
-    <div class="border-top"></div>
+    <div style="border-top: 1px solid #bcbcbc"></div>
+    <button id="print-table" class="btn neumorphic-btn text-primary mt-3" style="font-weight: 700">In Điểm sinh viên</button>
     @if (ViewBag.Deleted != null && ViewBag.Deleted == "true")
     {
       <div id="message" class="d-flex justify-content-between rounded w-100 my-2 px-2 py-3 bg-danger text-white" style="font-width: 700 !important;">
@@ -50,21 +49,26 @@
       </div>
 
     }
-    <div class="mt-5">
-      <table class="table table-bordered rounded table-striped">
+    <div class="mt-4">
+      <table id="student-subject-point-list" class="neumorphic">
         <thead>
         <tr>
           <th scope="col">Id</th>
           <th scope="col" class="filter">Môn học</th>
           <th scope="col" class="filter">Điểm lần 1</th>
           <th scope="col" class="filter">Điểm lần 2</th>
+          <th scope="col" class="filter">Điểm tổng kết</th>
         </tr>
         </thead>
         <tbody>
+        @if (Model.SubjectPointList == null || !Model.SubjectPointList.Any())
+        {
+          return;
+        }
         @foreach (var subjectPoint in @Model.SubjectPointList)
         {
-          
-          <form id="subjectPointForm" asp-controller="GradesManager" 
+
+          <form id="subjectPointForm" asp-controller="GradesManager"
                 asp-action="Details" method="post">
             <tr>
               <input hidden value="@subjectPoint.SubjectPointId" asp-for="SubjectPoint.SubjectPointId"/>
@@ -72,8 +76,6 @@
               <input hidden value="@subjectPoint.SubjectId" asp-for="SubjectPoint.SubjectId"/>
               <td scope="row">@subjectPoint.Subject.SubjectId</td>
               <td>@subjectPoint.Subject.SubjectName</td>
-              @* <td>@subjectPoint.FirstExam</td> *@
-              @* <td>@subjectPoint.SecondExam</td> *@
               <td>
                 <input id="firstExam" value="@subjectPoint.FirstExam"
                        type="number" step="any" min="0" max="10"
@@ -84,13 +86,12 @@
                        type="number" step="any" min="0" max="10"
                        class="form-control subjectPoint" asp-for="SubjectPoint.SecondExam"/>
               </td>
-              @* <th > *@
-              @*   <a asp-action="Details" asp-route-studentId="@Model.Student.StudentId" *@
-              @*      asp-route-subjectPointId="@subjectPoint.SubjectPointId" *@
-              @*      class="p-2 bg-primary rounded text-white">Details</a> *@
-              @* </th> *@
+              <td>
+                <input class="form-control" id="total-grade" type="number" step="any" min="0" max="10" readonly
+                       value="@Math.Round(@subjectPoint.FirstExam * 30 / 100 + @subjectPoint.SecondExam * 70 / 100, 2)"/>
+              </td>
             </tr>
-        </form>
+          </form>
         }
         </tbody>
       </table>
@@ -105,6 +106,59 @@
 <script>
  $('.subjectPoint').change(function (){
              $('#subjectPointForm').submit();
-         })
+ })
+
+    var myApp;
+    myApp = (function (app) {
+        $('#print-table').click(function () {
+            myApp.print();
+        });
+
+        app.print = function () {
+            //$.ajax({
+            //    type: "Get",
+            //    url: '/GradesManager/StudentSubjectPointList?semesterId=' + $("#semester-select").val(),
+            //    success: function (data) {
+                    if (myApp.arePopupsBlocked()) {
+                        alert('Please allow popups.');
+                    }
+                    var printWindow = window.open();
+                    if (printWindow) {
+                        $(printWindow.document.head).html("<style>" +
+                            "input{border: none; outline: none; background:none; color:black;}" +
+                            "#student-info{margin-bottom:0.6rem; width:50%;}" +
+                            ".form-outline{display:flex;flex-direction:column-reverse}" +
+                            ".form-outline label{border:1px solid black; border-top:none; font-weight:700; color:white; background:black; padding:0.3rem;}" +
+                            ".form-outline input{border:1px solid black;border-top:none; padding:0.3rem;}" +
+                            ".form-outline:first-child label{border-top:1px solid black;}" +
+                            "#print-table{display:none;}" +
+                            "#return-btn{display:none}"+
+                            "table{width: 100%;} table, th, tr, td{border: 1px solid black;border-collapse: collapse;} " +
+                            "th{background-color: black;color: white; font-weight: 700;} th,td{padding: 0.3rem;}"
+                            + "</style>")
+
+                        $(printWindow.document.body).html(document.getElementById("subject-point-list").innerHTML)
+                        printWindow.print()
+                    } else {
+                        alert('Please allow popups.');
+                    }
+               /* }*/
+                //error: function () {
+                //    alert('Error');
+                //}
+           /* });*/
+        };
+
+        app.arePopupsBlocked = function () {
+            var aWindow = window.open(null, "", "width=1,height=1");
+            try {
+                aWindow.close();
+                return false;
+            } catch (e) {
+                return true;
+            }
+        };
+        return app;
+    })(window.myApp || {})
 </script>
 }

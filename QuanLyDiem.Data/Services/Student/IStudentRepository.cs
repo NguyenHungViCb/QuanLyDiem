@@ -12,5 +12,6 @@ namespace QuanLyDiem.Data.Services
         void CreateStudent(Student student);
         void UpdateStudent(Student student);
         void DeleteStudent(int studentId);
+        void ResetPassword(int studentId,string password);
     }
 }

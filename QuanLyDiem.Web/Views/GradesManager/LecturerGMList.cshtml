@@ -1,4 +1,5 @@
-﻿@model QuanLyDiem.Web.ViewModels.GradesManager
+﻿@using System.Xml.Schema
+@model QuanLyDiem.Web.ViewModels.GradesManager
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
@@ -6,48 +7,70 @@
 
 <partial name="_LecturerSideBar"/>
 <div class="p-2 flex-grow-1">
-    <div class="main-container w-100 h-100 p-3 rounded">
+    <div class="main-container w-100 h-100 p-3 rounded neumorphic-container">
         <div class="">
-            <a asp-action="LecturerGMIndex">Return</a>
-            <div class="rounded-top bg-primary text-white p-3 mt-3">@Model.SubjectPointList.First().Subject.SubjectName</div>
-            <table class="table table-bordered rounded talbe">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Họ tên</th>
-                    <th scope="col">Lớp</th>
-                    <th scope="col">Điểm lần 1</th>
-                    <th scope="col">Điểm lần 2</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                @foreach (var subjectPoint in @Model.SubjectPointList)
-                {
-                    <form id="subjectPointForm" asp-controller="GradesManager" asp-action="LecturerGMList" method="post">
-                        <input asp-for="SubjectPoint.SubjectPointId" value="@subjectPoint.SubjectPointId" hidden/>
-                        <input asp-for="SubjectPoint.StudentId" value="@subjectPoint.StudentId" hidden/>
-                        <input asp-for="SubjectPoint.SubjectId" value="@subjectPoint.SubjectId" hidden/>
+            <div class="d-flex justify-content-between">
+                <a asp-action="LecturerGMIndex">Return</a>
+                <button id="print-table" class="btn neumorphic-btn text-primary btn-sm" style="font-weight: 700">
+                    In danh sách điểm
+                </button>
+            </div>
+                <div id="student-subject-point-list" class="neumorphic-container rounded-top">
+                    <div id="rank" class="rounded-top p-3 mt-4" style="background: #E6E7ED; 
+                border-bottom: 1px solid #bcbcbc; font-weight: 700">
+                        @Model.SubjectPointList.First().Subject.SubjectName
+                    </div>
+                    <table class="neumorphic sub-head">
+                        <thead>
                         <tr>
-                            <td>@subjectPoint.Student.StudentId</td>
-                            <td>@subjectPoint.Student.LastName @subjectPoint.Student.FirstName</td>
-                            <td>@subjectPoint.Student.Class.ClassName</td>
-                            <td>
-                                <input id="firstExam" value="@subjectPoint.FirstExam"
-                                       type="number" step="any" min="0" max="10"
-                                       class="form-control subjectPoint" asp-for="SubjectPoint.FirstExam"/>
-                            </td>
-                            <td>
-                                <input id="secondExam" value="@subjectPoint.SecondExam" 
-                                       type="number" step="any" min="0" max="10"
-                                       class="form-control subjectPoint" asp-for="SubjectPoint.SecondExam"/>
-                            </td>
+                            <th scope="col">Id</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Lớp</th>
+                            <th scope="col">Điểm lần 1</th>
+                            <th scope="col">Điểm lần 2</th>
+                            <th scope="col">Tổng kết</th>
                         </tr>
-                    </form>
-                }
-                </tbody>
-            </table>
-        </div>
+                        </thead>
+                        <tbody>
+
+                        @{
+                            if (Model.SubjectPointList == null)
+                            {
+                                return;
+                            }}
+                        @foreach (var subjectPoint in @Model.SubjectPointList)
+                        {
+                            Double total = @Math.Round(@subjectPoint.FirstExam * 30 / 100
+                                                       + @subjectPoint.SecondExam * 70 / 100, 2);
+                            <form id="subjectPointForm" asp-controller="GradesManager" asp-action="LecturerGMList" method="post">
+                                <input asp-for="SubjectPoint.SubjectPointId" value="@subjectPoint.SubjectPointId" hidden/>
+                                <input asp-for="SubjectPoint.StudentId" value="@subjectPoint.StudentId" hidden/>
+                                <input asp-for="SubjectPoint.SubjectId" value="@subjectPoint.SubjectId" hidden/>
+                                <tr>
+                                    <td>@subjectPoint.Student.StudentId</td>
+                                    <td>@subjectPoint.Student.LastName @subjectPoint.Student.FirstName</td>
+                                    <td>@subjectPoint.Student.Class.ClassName</td>
+                                    <td>
+                                        <input id="firstExam" value="@subjectPoint.FirstExam"
+                                               type="number" step="any" min="0" max="10"
+                                               class="form-control subjectPoint" asp-for="SubjectPoint.FirstExam"/>
+                                    </td>
+                                    <td>
+                                        <input id="secondExam" value="@subjectPoint.SecondExam"
+                                               type="number" step="any" min="0" max="10"
+                                               class="form-control subjectPoint" asp-for="SubjectPoint.SecondExam"/>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" id="total-grade" 
+                                               type="number" step="any" min="0" max="10" readonly
+                                               value="@total"/>
+                                    </td>
+                            </form>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
     </div>
 </div>
 
@@ -57,5 +80,50 @@
         $('.subjectPoint').change(function (){
             $('#subjectPointForm').submit();
         })
+        var myApp;
+                myApp = (function (app) {
+                    $('#print-table').click(function () {
+                       myApp.print();
+                    });
+                
+                    app.print = function () {
+                        // $.ajax({
+                            // type:"Get",
+                            // url: '/GradesManager/StudentSubjectPointList?semesterId='+$("#semester-select").val(),
+                            // function (data) {
+                                if (myApp.arePopupsBlocked()) {
+                                    alert('Please allow popups.');
+                                }
+                                var printWindow = window.open();
+                                if (printWindow) {
+                                    $(printWindow.document.head).html("<style>"+
+                                    "#rank{margin-bottom: 1.2rem;}"+
+                                    "input{border: none;outline: none}"+
+                                    "table{width: 100%;} table, th, tr, td{border: 1px solid black;border-collapse: collapse;} " +
+                                     "th{background-color: black;color: white; font-weight: 700;} th,td{padding: 0.3rem}"
+                                     +"</style>")
+                                    $(printWindow.document.body).html(document.getElementById("student-subject-point-list").innerHTML);
+                                    printWindow.print()
+                                } else {
+                                    alert('Please allow popups.');
+                                }
+                            // },
+                            // error: function () {
+                            //     alert('Error');
+                            // }
+                        // });
+                    };
+                
+                    app.arePopupsBlocked = function () {
+                        var aWindow = window.open(null, "", "width=1,height=1");
+                        try {
+                            aWindow.close();
+                            return false;
+                        } catch (e) {
+                            return true;
+                        }
+                    };
+                    return app;
+                })(window.myApp || {})
     </script>
 }

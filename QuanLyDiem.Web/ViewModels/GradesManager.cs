@@ -10,6 +10,7 @@ namespace QuanLyDiem.Web.ViewModels
         public Student Student { get; set; }
         public IEnumerable<Assignment> AssignmentList { get; set; }
         public IEnumerable<SubjectPoint> SubjectPointList { get; set; }
+        public Subject Subject { get; set; }
         public SubjectPoint SubjectPoint { get; set; }
         public IEnumerable<Semester> SemesterList { get; set; }
         public IEnumerable<Subject> SubjectList { get; set; }

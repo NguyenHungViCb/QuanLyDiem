@@ -18,7 +18,7 @@
 
 <partial name="_SideBar"/>
 <div class="p-2 flex-grow-1">
-    <div class="main-container w-100 h-100 p-3 rounded">
+    <div class="main-container w-100 h-100 p-3 rounded neumorphic-container">
         <div class="mb-4">
             <a asp-action="Index">Return to list</a>
         </div>
@@ -99,7 +99,7 @@
                     </div>
                     <span asp-validation-for="@Model.Lecturer.Address" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn neumorphic-btn text-primary">Save</button>
             </form>
         </div>
     </div>
